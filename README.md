@@ -20,16 +20,6 @@ php artisan migrate:fresh
 Model:
 php artisan make:model UserChat
 
-Routes:
-use App\Http\Controllers\UserChatController;
-
-Route::get('/userchats', [UserChatController::class, 'index'])->name('userchats.index');
-Route::get('/userchats/create', [UserChatController::class, 'create'])->name('userchats.create');
-Route::post('/userchats', [UserChatController::class, 'store'])->name('userchats.store');
-Route::get('/userchats/{id}/edit', [UserChatController::class, 'edit'])->name('userchats.edit');
-Route::put('/userchats/{id}', [UserChatController::class, 'update'])->name('userchats.update');
-Route::delete('/userchats/{id}', [UserChatController::class, 'destroy'])->name('userchats.destroy');
-
 Views:
 userchat-
    create.blade.php
