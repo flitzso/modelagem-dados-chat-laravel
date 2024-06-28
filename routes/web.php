@@ -7,8 +7,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('userchat', UserChatController::class);
-Route::get('/userchat', [UserChatController::class, 'index'])->name('userchat.index');
+
+/*
+* Parametro /userchats esta no lugar de /userchat 
+*/
+Route::get('/userchats', [UserChatController::class, 'index'])->name('userchats.index');
 Route::get('/userchat/create', [UserChatController::class, 'create'])->name('userchat.create');
 Route::post('/userchat', [UserChatController::class, 'store'])->name('userchat.store');
 Route::get('/userchat/{userchat}', [UserChatController::class, 'show'])->name('userchat.show');

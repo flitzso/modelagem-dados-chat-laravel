@@ -20,7 +20,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($userchats as $userchat)
+                            <!-- Bug de $userchats no lugar de $userchat -->
+                            @foreach ($userchat as $userchats)
                             <tr>
                                 <td>{{ $userchat->id }}</td>
                                 <td>{{ $userchat->name }}</td>

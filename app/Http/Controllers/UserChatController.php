@@ -14,8 +14,7 @@ class UserChatController extends Controller
     */
     public function index()
     {
-        $userchats = UserChat::all();
-        return view('userchats.index', compact('userchats'));
+        return view('userchat.index');
     }
 
     /*
