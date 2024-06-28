@@ -2,103 +2,86 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserChat;
 use Illuminate\Http\Request;
-
+use App\Models\User;
 
 class UserChatController extends Controller
 {
-    /*
-    *O componente index blablabla...
-    *
-    */
+    // Exibir a lista de usuários
     public function index()
     {
-        return view('userchat.index');
+        $users = User::all();
+        return view('componentes.index', compact('users'));
     }
 
-    /*
-    *O componente create blablabla...
-    *
-    */
+    // Exibir o formulário de criação de um novo usuário
     public function create()
     {
-        return view('userchat.create');
+        return view('componentes.create');
     }
 
-    /*
-    *O componente store blablabla...
-    *
-    */
-
+    // Salvar um novo usuário
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
 
-        UserChat::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+        $user = new User([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
         ]);
 
-        return redirect()->route('userchat.index')
-            ->with('success', 'Usuário de Chat criado com sucesso.');
+        $user->save();
+
+        return redirect('/users')->with('success', 'Usuário criado com sucesso!');
     }
 
-    /*
-    *O componente show blablabla...
-    *
-    */
-    public function show(UserChat $userchat)
+    // Exibir os dados de um usuário específico
+    public function show($id)
     {
-        return view('userchat.show', compact('userchat'));
+        $user = User::find($id);
+        return view('componentes.show', compact('user'));
     }
 
-    /*
-    *O componente edit blablabla...
-    *
-    */
-    public function edit(UserChat $userchat)
+    // Exibir o formulário de edição de um usuário
+    public function edit($id)
     {
-        return view('userchat.edit', compact('userchat'));
+        $user = User::find($id);
+        return view('componentes.edit', compact('user'));
     }
 
-    /*
-    *O componente update blablabla...
-    *
-    */
-
-    public function update(Request $request, UserChat $userchat)
+    // Atualizar os dados de um usuário
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:user_chats,email,' . $userchat->id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:6',
         ]);
 
-        if ($request->has('password')) {
-            $userchat->password = bcrypt($request->password);
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+
+        if ($request->get('password')) {
+            $user->password = bcrypt($request->get('password'));
         }
 
-        $userchat->update($request->only('name', 'email'));
+        $user->save();
 
-        return redirect()->route('userchat.index')
-            ->with('success', 'Usuário de Chat atualizado com sucesso.');
+        return redirect('/users')->with('success', 'Usuário atualizado com sucesso!');
     }
 
-    /*
-    *O componente destroy blablabla...
-    *
-    */
-    public function destroy(UserChat $userchat)
+    // Deletar um usuário
+    public function destroy($id)
     {
-        $userchat->delete();
+        $user = User::find($id);
+        $user->delete();
 
-        return redirect()->route('userchat.index')
-            ->with('success', 'Usuário de Chat excluído com sucesso.');
+        return redirect('/users')->with('success', 'Usuário deletado com sucesso!');
     }
 }
