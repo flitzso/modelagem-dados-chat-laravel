@@ -3,6 +3,16 @@
 Modelagem de dados, usando laravel e mysql.
 E uma modelagem de um sistema de chats.
 
+### Como rodar ###
+
+composer install
+
+php artisan key:generate
+
+php artisan migrate
+
+php artisan serve
+
 
 Seguindo o exemplo de UserChat o projeto se baseia em:
 Criar um controller, models, migrations, layouts, userchats[na views], routes.
