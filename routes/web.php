@@ -16,5 +16,5 @@ Route::get('/userchat/create', [UserChatController::class, 'create'])->name('use
 Route::post('/userchat', [UserChatController::class, 'store'])->name('userchat.store');
 Route::get('/userchat/{userchat}', [UserChatController::class, 'show'])->name('userchat.show');
 Route::get('/userchat/{userchat}/edit', [UserChatController::class, 'edit'])->name('userchat.edit');
-Route::put('/userchat/{userchat}', [UserChatController::class, 'update'])->name('userchat.update');
+Route::put('/userchats/{userchat}', [UserChatController::class, 'update'])->name('userchats.update');
 Route::delete('/userchat/{userchat}', [UserChatController::class, 'destroy'])->name('userchat.destroy');
