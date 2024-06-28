@@ -10,6 +10,7 @@
     <p><strong>Criado em:</strong> {{ $userchat->created_at->format('d/m/Y H:i:s') }}</p>
     <p><strong>Atualizado em:</strong> {{ $userchat->updated_at->format('d/m/Y H:i:s') }}</p>
     <a href="{{ route('userchats.index') }}" class="btn btn-secondary">Voltar</a>
+    <a href="{{ route('userchat.edit', $userchat->id) }}" class="btn btn-primary">Editar</a>
 
 </div>
 @endsection
