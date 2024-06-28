@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserChatController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,13 +7,9 @@ Route::get('/', function () {
 });
 
 
-/*
-* Parametro /userchats esta no lugar de /userchat 
-*/
-Route::get('/userchats', [UserChatController::class, 'index'])->name('userchats.index');
-Route::get('/userchat/create', [UserChatController::class, 'create'])->name('userchat.create');
-Route::post('/userchat', [UserChatController::class, 'store'])->name('userchat.store');
-Route::get('/userchat/{userchat}', [UserChatController::class, 'show'])->name('userchat.show');
-Route::get('/userchat/{userchat}/edit', [UserChatController::class, 'edit'])->name('userchat.edit');
-Route::put('/userchats/{userchat}', [UserChatController::class, 'update'])->name('userchats.update');
-Route::delete('/userchat/{userchat}', [UserChatController::class, 'destroy'])->name('userchat.destroy');
+use App\Http\Controllers\UserChatController;
+
+Route::resource('users', UserChatController::class);
+
+
+/* http://127.0.0.1:8000/users */
